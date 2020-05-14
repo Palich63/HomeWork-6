@@ -13,7 +13,7 @@ public class ProductManager {
 
 //    ProductManager productManager = new ProductManager();
 
-    private ProductRepository repository;
+    private ProductRepository repository = new ProductRepository();
 
     public ProductManager(ProductRepository repository) {
         this.repository = repository;
@@ -27,9 +27,17 @@ public class ProductManager {
         return repository.findAll();
     }
 
-    public Product[] searchBy(String text) {
-        for (Product product: repository.findAll()){
+    public void deleteById(int id){
+        repository.removeById(id);
+    }
 
+    public Product searchBy(String text) {
+        Product[] tmpProd = repository.findAll();
+        int index = 0;
+        for (Product product: tmpProd){
+            if (matches(product, text)) {
+                return product;
+            }
             }
         return null;
     }
