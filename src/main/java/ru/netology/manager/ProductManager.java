@@ -7,39 +7,35 @@ import ru.netology.domain.Product;
 import ru.netology.domain.Smartphone;
 import ru.netology.repository.ProductRepository;
 
-@Data
 @NoArgsConstructor
 public class ProductManager {
 
-//    ProductManager productManager = new ProductManager();
-
     private ProductRepository repository = new ProductRepository();
-
-    public ProductManager(ProductRepository repository) {
-        this.repository = repository;
-    }
 
     public void productAdd(Product item) {
         repository.save(item);
     }
 
-    public Product[] productAll(){
+    public Product[] allProduct() {
         return repository.findAll();
     }
 
-    public void deleteById(int id){
+    public void deleteById(int id) {
         repository.removeById(id);
     }
 
-    public Product searchBy(String text) {
-        Product[] tmpProd = repository.findAll();
-        int index = 0;
-        for (Product product: tmpProd){
+    public Product[] searchBy(String text) {
+        Product[] result = new Product[0];
+        for (Product product : repository.findAll()) {
             if (matches(product, text)) {
-                return product;
+                Product[] tmpProd = new Product[result.length + 1];
+                System.arraycopy(result, 0, tmpProd, 0, result.length);
+                tmpProd[tmpProd.length - 1] = product;
+                result = tmpProd;
             }
-            }
-        return null;
+
+        }
+        return result;
     }
 
     public boolean matches(Product product, String search) {
