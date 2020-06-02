@@ -5,7 +5,7 @@ import ru.netology.domain.Book;
 import ru.netology.domain.Product;
 import ru.netology.domain.Smartphone;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class ProductRepositoryTest {
     private ProductRepository product = new ProductRepository();
@@ -23,7 +23,5 @@ class ProductRepositoryTest {
         Product[] actual = product.findAll();
 
         assertArrayEquals(actual, expected);
-
-
     }
 }

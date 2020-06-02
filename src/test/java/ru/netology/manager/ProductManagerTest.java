@@ -1,5 +1,6 @@
 package ru.netology.manager;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Book;
 import ru.netology.domain.Product;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class ProductManagerTest {
 
-    private ProductManager productManager = new ProductManager();
+    private ProductManager productManager;
 
     private Book secondBook = new Book(3, 31, "Заводной апельсин", "Энтони Бёрджесс");
     private Book thirdBook = new Book(6, 45, "Право на ответ", "Энтони Бёрджесс");
@@ -19,12 +20,23 @@ class ProductManagerTest {
     private Smartphone forthSmart = new Smartphone(7, 450, "mi 8", "Xiaomi");
     private Smartphone fifthSmart = new Smartphone(8, 546, "Заводной апельсин", "Xiaomi");
 
+    @BeforeEach
+    void setUp(){
+        productManager = new ProductManager();
+
+        productManager.productAdd(secondBook);
+        productManager.productAdd(thirdBook);
+        productManager.productAdd(forthBook);
+        productManager.productAdd(secondSmart);
+        productManager.productAdd(thirdSmart);
+        productManager.productAdd(forthSmart);
+        productManager.productAdd(fifthSmart);
+    }
+
     @Test
     void ShouldAddToRepository() {
-        productManager.productAdd(secondBook);
-        productManager.productAdd(secondSmart);
 
-        Product[] actual = new Product[]{secondBook, secondSmart};
+        Product[] actual = new Product[]{secondBook, thirdBook, forthBook, secondSmart, thirdSmart, forthSmart, fifthSmart };
         Product[] expected = productManager.allProduct();
 
         assertArrayEquals(actual, expected);
@@ -32,11 +44,9 @@ class ProductManagerTest {
 
     @Test
     void ShouldDeleteById() {
-        productManager.productAdd(secondBook);
-        productManager.productAdd(secondSmart);
-        productManager.productAdd(thirdSmart);
 
-        Product[] actual = new Product[]{secondBook, thirdSmart};
+        //Удаление по полю ID
+        Product[] actual = new Product[]{secondBook, thirdBook, forthBook, thirdSmart, forthSmart, fifthSmart };
         productManager.deleteById(4);
         Product[] expected = productManager.allProduct();
 
@@ -45,12 +55,6 @@ class ProductManagerTest {
 
     @Test
     void ShouldSearchName() {
-        productManager.productAdd(secondBook);
-        productManager.productAdd(thirdBook);
-        productManager.productAdd(secondSmart);
-        productManager.productAdd(thirdSmart);
-        productManager.productAdd(forthSmart);
-        productManager.productAdd(fifthSmart);
 
         //Поиск по полю Name
         Product[] actual = new Product[]{secondBook, fifthSmart};
@@ -60,13 +64,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldSearch() {
-        productManager.productAdd(secondBook);
-        productManager.productAdd(thirdBook);
-        productManager.productAdd(secondSmart);
-        productManager.productAdd(thirdSmart);
-        productManager.productAdd(forthSmart);
-        productManager.productAdd(fifthSmart);
+    void ShouldSearchManufacture() {
 
         //Поиск по полю Manufacture
         Product[] actual = new Product[]{thirdSmart, forthSmart, fifthSmart};
@@ -77,14 +75,8 @@ class ProductManagerTest {
 
     @Test
     void ShouldSearchNothing() {
-        productManager.productAdd(secondBook);
-        productManager.productAdd(thirdBook);
-        productManager.productAdd(secondSmart);
-        productManager.productAdd(thirdSmart);
-        productManager.productAdd(forthSmart);
-        productManager.productAdd(fifthSmart);
 
-        //Поис не существующего текста, результат пустой массив
+        //Поиск не существующего текста, результат пустой массив
         Product[] actual = new Product[0];
         Product[] expected = productManager.searchBy("9");
 
@@ -93,14 +85,8 @@ class ProductManagerTest {
 
     @Test
     void ShouldSearchNothingMore() {
-        productManager.productAdd(secondBook);
-        productManager.productAdd(thirdBook);
-        productManager.productAdd(secondSmart);
-        productManager.productAdd(thirdSmart);
-        productManager.productAdd(forthSmart);
-        productManager.productAdd(fifthSmart);
 
-        //Поис не существующего текста, результат пустой массив
+        //Поиск не существующего текста, результат пустой массив
         Product[] actual = new Product[0];
         Product[] expected = productManager.searchBy("Право");
 
@@ -109,12 +95,6 @@ class ProductManagerTest {
 
     @Test
     void ShouldSearchAuthor() {
-        productManager.productAdd(secondBook);
-        productManager.productAdd(thirdBook);
-        productManager.productAdd(forthBook);
-        productManager.productAdd(secondSmart);
-        productManager.productAdd(thirdSmart);
-        productManager.productAdd(fifthSmart);
 
         //Поиск по полю Author при условии, что в одном продукте попутаны местами Name и Author
         Product[] actual = new Product[]{secondBook, thirdBook, forthBook};

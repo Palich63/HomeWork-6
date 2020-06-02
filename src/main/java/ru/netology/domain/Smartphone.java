@@ -1,13 +1,12 @@
 package ru.netology.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class Smartphone extends Product {
     private String manufacture;
-
-    public Smartphone() {
-    }
 
     public Smartphone(int id, int cost, String name, String manufacture) {
         super(id, cost, name);
