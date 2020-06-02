@@ -21,7 +21,7 @@ class ProductManagerTest {
     private Smartphone fifthSmart = new Smartphone(8, 546, "Заводной апельсин", "Xiaomi");
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         productManager = new ProductManager();
 
         productManager.productAdd(secondBook);
@@ -34,19 +34,19 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldAddToRepository() {
+    void shouldAddToRepository() {
 
-        Product[] actual = new Product[]{secondBook, thirdBook, forthBook, secondSmart, thirdSmart, forthSmart, fifthSmart };
+        Product[] actual = new Product[]{secondBook, thirdBook, forthBook, secondSmart, thirdSmart, forthSmart, fifthSmart};
         Product[] expected = productManager.allProduct();
 
         assertArrayEquals(actual, expected);
     }
 
     @Test
-    void ShouldDeleteById() {
+    void shouldDeleteById() {
 
         //Удаление по полю ID
-        Product[] actual = new Product[]{secondBook, thirdBook, forthBook, thirdSmart, forthSmart, fifthSmart };
+        Product[] actual = new Product[]{secondBook, thirdBook, forthBook, thirdSmart, forthSmart, fifthSmart};
         productManager.deleteById(4);
         Product[] expected = productManager.allProduct();
 
@@ -54,7 +54,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldSearchName() {
+    void shouldSearchName() {
 
         //Поиск по полю Name
         Product[] actual = new Product[]{secondBook, fifthSmart};
@@ -64,7 +64,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldSearchManufacture() {
+    void shouldSearchManufacture() {
 
         //Поиск по полю Manufacture
         Product[] actual = new Product[]{thirdSmart, forthSmart, fifthSmart};
@@ -74,7 +74,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldSearchNothing() {
+    void shouldSearchNothing() {
 
         //Поиск не существующего текста, результат пустой массив
         Product[] actual = new Product[0];
@@ -84,7 +84,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldSearchNothingMore() {
+    void shouldSearchNothingMore() {
 
         //Поиск не существующего текста, результат пустой массив
         Product[] actual = new Product[0];
@@ -94,7 +94,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldSearchAuthor() {
+    void shouldSearchAuthor() {
 
         //Поиск по полю Author при условии, что в одном продукте попутаны местами Name и Author
         Product[] actual = new Product[]{secondBook, thirdBook, forthBook};
