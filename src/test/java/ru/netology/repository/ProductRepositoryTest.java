@@ -5,7 +5,7 @@ import ru.netology.domain.Book;
 import ru.netology.domain.Product;
 import ru.netology.domain.Smartphone;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class ProductRepositoryTest {
     private ProductRepository product = new ProductRepository();
@@ -25,5 +25,29 @@ class ProductRepositoryTest {
         assertArrayEquals(actual, expected);
 
 
+    }
+
+    @Test
+    void shouldCatchException() {
+
+        product.save(firstBook);
+        product.save(firstSmart);
+        Product[] expected = new Product[]{firstBook, firstSmart};
+        product.removeById(3);
+        Product[] actual = product.findAll();
+
+        assertArrayEquals(actual, expected);
+    }
+
+    @Test
+    void shouldNoCatchException() {
+
+        product.save(firstBook);
+        product.save(firstSmart);
+        Product[] expected = new Product[]{firstBook};
+        product.removeById(2);
+        Product[] actual = product.findAll();
+
+        assertArrayEquals(actual, expected);
     }
 }
