@@ -1,13 +1,17 @@
 package ru.netology.manager;
 
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import ru.netology.domain.Product;
 import ru.netology.repository.ProductRepository;
 
-@NoArgsConstructor
+@AllArgsConstructor
 public class ProductManager {
 
     private ProductRepository repository = new ProductRepository();
+
+    public ProductManager() {
+
+    }
 
     public void productAdd(Product item) {
         repository.save(item);
@@ -30,7 +34,6 @@ public class ProductManager {
                 tmpProd[tmpProd.length - 1] = product;
                 result = tmpProd;
             }
-
         }
         return result;
     }

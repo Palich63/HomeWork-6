@@ -13,7 +13,6 @@ class ProductRepositoryTest {
     private Book firstBook = new Book(1, 25, "Олдос Хаксли", "О дивный новый мир");
     private Smartphone firstSmart = new Smartphone(2, 450, "g8 Plus", "Motorola");
 
-
     @Test
     void shouldSaveBook() {
 
@@ -23,7 +22,18 @@ class ProductRepositoryTest {
         Product[] actual = product.findAll();
 
         assertArrayEquals(actual, expected);
+    }
 
+    @Test
+    void shouldDelete() {
 
+        product.save(firstBook);
+        product.save(firstSmart);
+
+        Product[] expected = new Product[]{firstBook};
+        product.removeById(2);
+        Product[] actual = product.findAll();
+
+        assertArrayEquals(actual, expected);
     }
 }

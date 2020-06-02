@@ -20,7 +20,7 @@ class ProductManagerTest {
     private Smartphone fifthSmart = new Smartphone(8, 546, "Заводной апельсин", "Xiaomi");
 
     @Test
-    void ShouldAddToRepository() {
+    void shouldAddToRepository() {
         productManager.productAdd(secondBook);
         productManager.productAdd(secondSmart);
 
@@ -31,7 +31,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldDeleteById() {
+    void shouldDeleteById() {
         productManager.productAdd(secondBook);
         productManager.productAdd(secondSmart);
         productManager.productAdd(thirdSmart);
@@ -44,7 +44,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldSearchName() {
+    void shouldSearchName() {
         productManager.productAdd(secondBook);
         productManager.productAdd(thirdBook);
         productManager.productAdd(secondSmart);
@@ -60,7 +60,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldSearch() {
+    void shouldSearchManufacture() {
         productManager.productAdd(secondBook);
         productManager.productAdd(thirdBook);
         productManager.productAdd(secondSmart);
@@ -76,7 +76,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldSearchNothing() {
+    void shouldSearchNothing() {
         productManager.productAdd(secondBook);
         productManager.productAdd(thirdBook);
         productManager.productAdd(secondSmart);
@@ -84,7 +84,7 @@ class ProductManagerTest {
         productManager.productAdd(forthSmart);
         productManager.productAdd(fifthSmart);
 
-        //Поис не существующего текста, результат пустой массив
+        //Поиск не существующего текста, результат пустой массив
         Product[] actual = new Product[0];
         Product[] expected = productManager.searchBy("9");
 
@@ -92,7 +92,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldSearchNothingMore() {
+    void shouldSearchNothingMore() {
         productManager.productAdd(secondBook);
         productManager.productAdd(thirdBook);
         productManager.productAdd(secondSmart);
@@ -100,7 +100,7 @@ class ProductManagerTest {
         productManager.productAdd(forthSmart);
         productManager.productAdd(fifthSmart);
 
-        //Поис не существующего текста, результат пустой массив
+        //Поиск не существующего текста, результат пустой массив
         Product[] actual = new Product[0];
         Product[] expected = productManager.searchBy("Право");
 
@@ -108,7 +108,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void ShouldSearchAuthor() {
+    void shouldSearchAuthor() {
         productManager.productAdd(secondBook);
         productManager.productAdd(thirdBook);
         productManager.productAdd(forthBook);
