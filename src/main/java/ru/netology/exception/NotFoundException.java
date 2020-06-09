@@ -1,9 +1,9 @@
 package ru.netology.exception;
 
-public class NotFoundException {
-
-    public void throwChecked() throws RuntimeException {
-        throw new RuntimeException();
+public class NotFoundException extends RuntimeException {
+    public NotFoundException(String s) {
+        System.out.println(s);
     }
 }
+
 

@@ -4,8 +4,9 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domain.Book;
 import ru.netology.domain.Product;
 import ru.netology.domain.Smartphone;
+import ru.netology.exception.NotFoundException;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ProductRepositoryTest {
     private ProductRepository product = new ProductRepository();
@@ -32,11 +33,7 @@ class ProductRepositoryTest {
 
         product.save(firstBook);
         product.save(firstSmart);
-        Product[] expected = new Product[]{firstBook, firstSmart};
-        product.removeById(3);
-        Product[] actual = product.findAll();
-
-        assertArrayEquals(actual, expected);
+        assertThrows(NotFoundException.class, ()->product.removeById(3));
     }
 
     @Test
@@ -47,7 +44,6 @@ class ProductRepositoryTest {
         Product[] expected = new Product[]{firstBook};
         product.removeById(2);
         Product[] actual = product.findAll();
-
         assertArrayEquals(actual, expected);
     }
 }
